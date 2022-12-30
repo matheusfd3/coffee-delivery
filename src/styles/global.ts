@@ -34,8 +34,10 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   #root {
+    box-sizing: content-box;
     max-width: 70rem;
     margin: 0 auto;
+    padding: 0 1rem;
   }
 
   button {
