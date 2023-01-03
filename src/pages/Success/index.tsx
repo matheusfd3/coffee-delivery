@@ -6,6 +6,7 @@ import {
   Info,
   InfoContent,
   Infos,
+  Section,
   SubTitle,
   SuccessContainer,
   Title,
@@ -16,7 +17,7 @@ import successImage from '../../assets/success-image.svg'
 export function Success() {
   return (
     <SuccessContainer>
-      <div>
+      <Section>
         <Title>Uhu! Pedido confirmado</Title>
         <SubTitle>
           Agora é só aguardar que logo o café chegará até você
@@ -54,7 +55,7 @@ export function Success() {
             </Info>
           </Infos>
         </ContainerInfos>
-      </div>
+      </Section>
       <img src={successImage} alt="" />
     </SuccessContainer>
   )

@@ -5,8 +5,13 @@ export const SuccessContainer = styled.main`
   align-items: flex-end;
   gap: 6.25rem;
   justify-content: space-between;
-  padding-top: 5rem;
+  margin-top: 5rem;
 `
+export const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+`
+
 export const Title = styled.h1`
   font-family: 'Baloo 2';
   font-weight: 800;

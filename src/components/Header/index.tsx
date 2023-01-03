@@ -13,6 +13,7 @@ import logoCoffeeDelivery from '../../assets/logo-coffee-delivery.svg'
 export function Header() {
   navigator.geolocation.getCurrentPosition((position) => {
     console.log(position)
+    // https://www.geoapify.com/
   })
 
   return (

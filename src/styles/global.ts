@@ -25,6 +25,20 @@ export const GlobalStyle = createGlobalStyle`
     background: ${(props) => props.theme.background};
     color: ${(props) => props.theme['base-text']};
     -webkit-font-smoothing: antialiased;
+
+    overflow-y: scroll;
+  }
+
+  body::-webkit-scrollbar {
+    width: 1.6rem;
+    background-color: transparent;
+  } 
+
+  body::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background-color: hsl(0,0%,85%);
+    border-radius: 16px;
+    border: 8px solid transparent;
   }
 
   body, input, textarea, button {

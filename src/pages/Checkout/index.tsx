@@ -1,62 +1,120 @@
+import {
+  Bank,
+  CreditCard,
+  CurrencyDollar,
+  MapPinLine,
+  Money,
+} from 'phosphor-react'
+
+import {
+  AddressContainer,
+  CheckoutContainer,
+  PaymentContainer,
+  Title,
+  FillInput,
+  SmallInput,
+  LeftSideContainer,
+  RightSideContainer,
+  AddressInputWrapper,
+  DefaultInput,
+  SubAddressInputWrapper,
+  AddressHeaderContainer,
+  AddressHeader,
+  PaymentHeaderContainer,
+  PaymentHeader,
+  PaymentChoice,
+  PaymentChoiceLabel,
+  CoffeeCardContainer,
+  PricesContainer,
+  PriceSection,
+  SubmitButton,
+} from './styles'
+
 export function Checkout() {
   return (
-    <form>
-      <div>
-        <strong>Complete seu pedido</strong>
-        <div>
-          <div>
-            <img src="" alt="" />
-            <div>
+    <CheckoutContainer>
+      <LeftSideContainer>
+        <Title>Complete seu pedido</Title>
+
+        <AddressContainer>
+          <AddressHeaderContainer>
+            <MapPinLine size={22} />
+            <AddressHeader>
               <span>Endereço de Entrega</span>
               <span>Informe o endereço onde deseja receber seu pedido</span>
-            </div>
-          </div>
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-        </div>
-        <div>
-          <div>
-            <img src="" alt="" />
-            <div>
+            </AddressHeader>
+          </AddressHeaderContainer>
+          <AddressInputWrapper>
+            <DefaultInput name="cep" placeholder="CEP" type="text" />
+            <FillInput name="street" placeholder="Rua" type="text" />
+            <SubAddressInputWrapper>
+              <DefaultInput
+                name="street-number"
+                placeholder="Número"
+                type="text"
+              />
+              <FillInput
+                name="complement"
+                placeholder="Complemento"
+                type="text"
+              />
+            </SubAddressInputWrapper>
+            <SubAddressInputWrapper>
+              <DefaultInput name="district" placeholder="Bairro" type="text" />
+              <FillInput name="city" placeholder="Cidade" type="text" />
+              <SmallInput name="state" placeholder="UF" type="text" />
+            </SubAddressInputWrapper>
+          </AddressInputWrapper>
+        </AddressContainer>
+        <PaymentContainer>
+          <PaymentHeaderContainer>
+            <CurrencyDollar size={22} />
+            <PaymentHeader>
               <span>Pagamento</span>
               <span>
                 O pagamento é feito na entrega. Escolha a forma que deseja pagar
               </span>
-            </div>
-          </div>
-          <input type="radio" name="" id="" />
-          <input type="radio" name="" id="" />
-          <input type="radio" name="" id="" />
-        </div>
-      </div>
-      <div>
-        <strong>Cafés selecionados</strong>
-        <div>
-          <ul>
-            <li></li>
-          </ul>
-          <div>
-            <div>
+            </PaymentHeader>
+          </PaymentHeaderContainer>
+          <PaymentChoice>
+            <PaymentChoiceLabel>
+              <CreditCard size={16} />
+              Cartão de Crédito
+              <input type="radio" name="payment-method" value="credit-card" />
+            </PaymentChoiceLabel>
+            <PaymentChoiceLabel>
+              <Bank size={16} />
+              Cartão de Débito
+              <input type="radio" name="payment-method" value="debit-card" />
+            </PaymentChoiceLabel>
+            <PaymentChoiceLabel>
+              <Money size={16} />
+              Dinheiro
+              <input type="radio" name="payment-method" value="cash" />
+            </PaymentChoiceLabel>
+          </PaymentChoice>
+        </PaymentContainer>
+      </LeftSideContainer>
+      <RightSideContainer>
+        <Title>Cafés selecionados</Title>
+        <CoffeeCardContainer>
+          <PricesContainer>
+            <PriceSection>
               <span>Total de itens</span>
               <span>R$ 29,70</span>
-            </div>
-            <div>
+            </PriceSection>
+            <PriceSection>
               <span>Entrega</span>
               <span>R$ 3,50</span>
-            </div>
-            <div>
-              <span>Total</span>
-              <span>R$ 33,20</span>
-            </div>
-          </div>
-        </div>
-        <button type="submit">Confirmar pedido</button>
-      </div>
-    </form>
+            </PriceSection>
+            <PriceSection>
+              <strong>Total</strong>
+              <strong>R$ 33,20</strong>
+            </PriceSection>
+          </PricesContainer>
+          <SubmitButton type="submit">Confirmar pedido</SubmitButton>
+        </CoffeeCardContainer>
+      </RightSideContainer>
+    </CheckoutContainer>
   )
 }

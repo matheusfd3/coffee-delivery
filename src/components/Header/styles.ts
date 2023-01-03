@@ -2,10 +2,9 @@ import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 
 export const HeaderContainer = styled.header`
-  padding: 2rem 0;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  padding: 2rem 0;
 `
 
 export const HomeLink = styled(NavLink)`
