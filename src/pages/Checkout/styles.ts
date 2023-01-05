@@ -192,7 +192,7 @@ export const CoffeeCardContainer = styled.div`
 `
 
 export const PricesContainer = styled.ul`
-  list-style: none;
+  list-style-type: none;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -227,4 +227,10 @@ export const SubmitButton = styled.button`
   font-weight: 700;
   text-transform: uppercase;
   line-height: 160%;
+
+  transition: background 0.2s;
+
+  &:hover {
+    background: ${(props) => props.theme['yellow-dark']};
+  }
 `

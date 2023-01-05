@@ -67,6 +67,9 @@ export const ContainerSVG = styled.div<ContainerSVGProps>`
 `
 
 export const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+
   padding-top: 2rem;
   padding-bottom: 10rem;
 `
@@ -74,6 +77,8 @@ export const Section = styled.section`
 export const TitleCoffee = styled.strong`
   font-family: 'Baloo 2';
   font-size: 2rem;
+
+  margin-bottom: 3.375rem;
 
   color: ${(props) => props.theme['base-subtitle']};
 `
