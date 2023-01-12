@@ -71,7 +71,7 @@ export const Section = styled.section`
   flex-direction: column;
 
   padding-top: 2rem;
-  padding-bottom: 10rem;
+  padding-bottom: 3rem;
 `
 
 export const TitleCoffee = styled.strong`

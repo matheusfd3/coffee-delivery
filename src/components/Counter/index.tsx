@@ -1,12 +1,30 @@
 import { Minus, Plus } from 'phosphor-react'
-import { CounterContainer } from './styles'
+import { ActionButton, CounterContainer, CounterNumber } from './styles'
 
-export function Counter() {
+interface CounterProps {
+  counter?: number
+  setCoffeeCounter: (value: number) => void
+}
+
+export function Counter({ counter = 1, setCoffeeCounter }: CounterProps) {
+  function handleIncrement() {
+    setCoffeeCounter(counter + 1)
+  }
+
+  function handleDecrement() {
+    if (counter === 1) return
+    setCoffeeCounter(counter - 1)
+  }
+
   return (
     <CounterContainer>
-      <Minus size={14} weight="bold" />
-      <span>1</span>
-      <Plus size={14} weight="bold" />
+      <ActionButton type="button" onClick={handleDecrement}>
+        <Minus size={14} weight="bold" />
+      </ActionButton>
+      <CounterNumber>{counter}</CounterNumber>
+      <ActionButton type="button" onClick={handleIncrement}>
+        <Plus size={14} weight="bold" />
+      </ActionButton>
     </CounterContainer>
   )
 }

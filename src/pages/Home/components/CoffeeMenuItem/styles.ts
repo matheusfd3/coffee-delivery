@@ -63,12 +63,12 @@ export const Footer = styled.div`
 
   display: flex;
   justify-content: space-between;
+`
 
-  span {
-    font-size: 0.875rem;
+export const Price = styled.span`
+  font-size: 0.875rem;
 
-    color: ${(props) => props.theme['base-text']};
-  }
+  color: ${(props) => props.theme['base-text']};
 
   strong {
     font-family: 'Baloo 2';

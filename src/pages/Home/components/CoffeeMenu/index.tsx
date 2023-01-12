@@ -16,14 +16,6 @@ export function CoffeeMenu() {
           price={coffee.price}
         />
       ))}
-      {/* <CoffeeMenuItem
-        id={1}
-        imageName="asdasda"
-        tags={['sdfsdf']}
-        title="sdfsdfs sdf sdfsd"
-        description="sdfsd fsdfsd fsdfsdfsdf sdfsdfsdfsdfsdfsdfsd"
-        price={1}
-      ></CoffeeMenuItem> */}
     </CoffeeMenuContainer>
   )
 }

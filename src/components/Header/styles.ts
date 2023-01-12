@@ -37,6 +37,8 @@ export const Location = styled.span`
 `
 
 export const ShoppingCartLink = styled(NavLink)`
+  position: relative;
+
   display: flex;
   padding: 0.5rem;
 
@@ -47,4 +49,29 @@ export const ShoppingCartLink = styled(NavLink)`
   svg {
     color: ${(props) => props.theme['yellow-dark']};
   }
+`
+
+interface AmountCoffeeProps {
+  hasItem: boolean
+}
+
+export const AmountCoffee = styled.span<AmountCoffeeProps>`
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: ${(props) => props.theme['yellow-dark']};
+
+  visibility: ${(props) => (props.hasItem ? 'visible' : 'hidden')};
+
+  color: ${(props) => props.theme.white};
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

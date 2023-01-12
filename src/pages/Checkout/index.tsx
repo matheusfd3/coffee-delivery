@@ -5,7 +5,10 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
+import { useContext } from 'react'
+import { CartContext } from '../../contexts/CartContext'
 
+import { CoffeeCardList } from './components/CoffeeCardList'
 import {
   AddressContainer,
   CheckoutContainer,
@@ -31,6 +34,16 @@ import {
 } from './styles'
 
 export function Checkout() {
+  const { coffees } = useContext(CartContext)
+
+  const totalItems = coffees.reduce((accumulator, coffee) => {
+    return accumulator + coffee.price * coffee.amount
+  }, 0)
+
+  const deliveryFee = coffees.length ? 3.5 : 0
+
+  const totalItemsWithDeliveryFee = totalItems + deliveryFee
+
   return (
     <CheckoutContainer>
       <LeftSideContainer>
@@ -98,18 +111,34 @@ export function Checkout() {
       <RightSideContainer>
         <Title>Cafés selecionados</Title>
         <CoffeeCardContainer>
+          <CoffeeCardList />
           <PricesContainer>
             <PriceSection>
               <span>Total de itens</span>
-              <span>R$ 29,70</span>
+              <span>
+                {new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(totalItems)}
+              </span>
             </PriceSection>
             <PriceSection>
               <span>Entrega</span>
-              <span>R$ 3,50</span>
+              <span>
+                {new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(deliveryFee)}
+              </span>
             </PriceSection>
             <PriceSection>
               <strong>Total</strong>
-              <strong>R$ 33,20</strong>
+              <strong>
+                {new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(totalItemsWithDeliveryFee)}
+              </strong>
             </PriceSection>
           </PricesContainer>
           <SubmitButton type="submit">Confirmar pedido</SubmitButton>

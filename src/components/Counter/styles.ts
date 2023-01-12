@@ -3,18 +3,15 @@ import styled from 'styled-components'
 export const CounterContainer = styled.main`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
+  gap: 0.25rem;
 
+  width: 4.5rem;
   padding: 0.5rem;
 
   background: ${(props) => props.theme['base-button']};
 
   border-radius: 6px;
-
-  span {
-    font-size: 1rem;
-    color: ${(props) => props.theme['base-title']};
-  }
 
   svg {
     cursor: pointer;
@@ -26,4 +23,15 @@ export const CounterContainer = styled.main`
       color: ${(props) => props.theme['purple-dark']};
     }
   }
+`
+
+export const CounterNumber = styled.span`
+  font-size: 1rem;
+  color: ${(props) => props.theme['base-title']};
+`
+
+export const ActionButton = styled.button`
+  display: flex;
+  border: none;
+  background: transparent;
 `
