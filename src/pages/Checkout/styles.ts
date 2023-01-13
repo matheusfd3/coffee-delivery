@@ -138,7 +138,11 @@ export const PaymentChoice = styled.div`
   margin-top: 2rem;
 `
 
-export const PaymentChoiceLabel = styled.label`
+interface PaymentChoiceLabelProps {
+  isActive: boolean
+}
+
+export const PaymentChoiceLabel = styled.label<PaymentChoiceLabelProps>`
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -149,15 +153,20 @@ export const PaymentChoiceLabel = styled.label`
   font-size: 0.75rem;
   color: ${(props) => props.theme['base-text']};
 
-  background: ${(props) => props.theme['base-button']};
+  background: ${(props) =>
+    props.isActive ? props.theme['purple-light'] : props.theme['base-button']};
 
-  border: 1px solid transparent;
+  border: 1px solid
+    ${(props) =>
+      props.isActive ? props.theme.purple : props.theme['base-button']};
+
   border-radius: 6px;
 
   transition: background-color 0.2s;
 
   &:hover {
-    background: ${(props) => props.theme['base-hover']};
+    background: ${(props) =>
+      props.isActive ? props.theme['purple-light'] : props.theme['base-hover']};
     cursor: pointer;
   }
 

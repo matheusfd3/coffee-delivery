@@ -1,3 +1,12 @@
+import { useContext, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+
+import { CartContext } from '../../contexts/CartContext'
+
+import { CoffeeCardList } from './components/CoffeeCardList'
+
 import {
   Bank,
   CreditCard,
@@ -5,10 +14,7 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
-import { useContext } from 'react'
-import { CartContext } from '../../contexts/CartContext'
 
-import { CoffeeCardList } from './components/CoffeeCardList'
 import {
   AddressContainer,
   CheckoutContainer,
@@ -32,9 +38,49 @@ import {
   PriceSection,
   SubmitButton,
 } from './styles'
+import { FormContext } from '../../contexts/FormContext'
+import { useNavigate } from 'react-router-dom'
+
+const formValidationSchema = zod.object({
+  cep: zod.string().min(8).max(9),
+  street: zod.string().min(1),
+  streetNumber: zod.string().min(1),
+  complement: zod.string(),
+  district: zod.string().min(1),
+  city: zod.string().min(1),
+  state: zod.string().length(2),
+  paymentMethod: zod.enum(['Credit', 'Debit', 'Cash']),
+})
+
+type FormValidationData = zod.infer<typeof formValidationSchema>
 
 export function Checkout() {
   const { coffees } = useContext(CartContext)
+  const { form, setNewValuesForm } = useContext(FormContext)
+
+  const formValidation = useForm<FormValidationData>({
+    resolver: zodResolver(formValidationSchema),
+    values: {
+      cep: form.cep,
+      street: form.street,
+      streetNumber: form.streetNumber,
+      complement: form.complement,
+      district: form.district,
+      city: form.city,
+      state: form.state,
+      paymentMethod: form.paymentMethod,
+    },
+  })
+
+  const { handleSubmit, register, watch } = formValidation
+
+  const navigate = useNavigate()
+
+  function handleCreateNewOrder(data: FormValidationData) {
+    if (coffees.length === 0) return
+    setNewValuesForm(data)
+    navigate('/success')
+  }
 
   const totalItems = coffees.reduce((accumulator, coffee) => {
     return accumulator + coffee.price * coffee.amount
@@ -44,11 +90,12 @@ export function Checkout() {
 
   const totalItemsWithDeliveryFee = totalItems + deliveryFee
 
+  const watchPaymentMethod = watch('paymentMethod')
+
   return (
-    <CheckoutContainer>
+    <CheckoutContainer onSubmit={handleSubmit(handleCreateNewOrder)}>
       <LeftSideContainer>
         <Title>Complete seu pedido</Title>
-
         <AddressContainer>
           <AddressHeaderContainer>
             <MapPinLine size={22} />
@@ -58,24 +105,32 @@ export function Checkout() {
             </AddressHeader>
           </AddressHeaderContainer>
           <AddressInputWrapper>
-            <DefaultInput name="cep" placeholder="CEP" type="text" />
-            <FillInput name="street" placeholder="Rua" type="text" />
+            <DefaultInput placeholder="CEP" type="text" {...register('cep')} />
+            <FillInput placeholder="Rua" type="text" {...register('street')} />
             <SubAddressInputWrapper>
               <DefaultInput
-                name="street-number"
                 placeholder="Número"
                 type="text"
+                {...register('streetNumber')}
               />
               <FillInput
-                name="complement"
                 placeholder="Complemento"
                 type="text"
+                {...register('complement')}
               />
             </SubAddressInputWrapper>
             <SubAddressInputWrapper>
-              <DefaultInput name="district" placeholder="Bairro" type="text" />
-              <FillInput name="city" placeholder="Cidade" type="text" />
-              <SmallInput name="state" placeholder="UF" type="text" />
+              <DefaultInput
+                placeholder="Bairro"
+                type="text"
+                {...register('district')}
+              />
+              <FillInput
+                placeholder="Cidade"
+                type="text"
+                {...register('city')}
+              />
+              <SmallInput placeholder="UF" type="text" {...register('state')} />
             </SubAddressInputWrapper>
           </AddressInputWrapper>
         </AddressContainer>
@@ -90,20 +145,28 @@ export function Checkout() {
             </PaymentHeader>
           </PaymentHeaderContainer>
           <PaymentChoice>
-            <PaymentChoiceLabel>
+            <PaymentChoiceLabel isActive={watchPaymentMethod === 'Credit'}>
               <CreditCard size={16} />
               Cartão de Crédito
-              <input type="radio" name="payment-method" value="credit-card" />
+              <input
+                type="radio"
+                value="Credit"
+                {...register('paymentMethod')}
+              />
             </PaymentChoiceLabel>
-            <PaymentChoiceLabel>
+            <PaymentChoiceLabel isActive={watchPaymentMethod === 'Debit'}>
               <Bank size={16} />
               Cartão de Débito
-              <input type="radio" name="payment-method" value="debit-card" />
+              <input
+                type="radio"
+                value="Debit"
+                {...register('paymentMethod')}
+              />
             </PaymentChoiceLabel>
-            <PaymentChoiceLabel>
+            <PaymentChoiceLabel isActive={watchPaymentMethod === 'Cash'}>
               <Money size={16} />
               Dinheiro
-              <input type="radio" name="payment-method" value="cash" />
+              <input type="radio" value="Cash" {...register('paymentMethod')} />
             </PaymentChoiceLabel>
           </PaymentChoice>
         </PaymentContainer>
