@@ -1,4 +1,7 @@
+import { useContext } from 'react'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+
+import { FormContext } from '../../contexts/FormContext'
 
 import {
   ContainerInfos,
@@ -15,6 +18,8 @@ import {
 import successImage from '../../assets/success-image.svg'
 
 export function Success() {
+  const { form } = useContext(FormContext)
+
   return (
     <SuccessContainer>
       <Section>
@@ -30,9 +35,10 @@ export function Success() {
               </ContainerSVG>
               <InfoContent>
                 <span>
-                  Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                  Entrega em{' '}
+                  <strong>{`${form.street}, ${form.streetNumber}`}</strong>
                 </span>
-                <span>Farrapos - Porto Alegre, RS</span>
+                <span>{`${form.district} - ${form.city}, ${form.state}`}</span>
               </InfoContent>
             </Info>
             <Info>
@@ -50,7 +56,15 @@ export function Success() {
               </ContainerSVG>
               <InfoContent>
                 <span>Pagamento na entrega</span>
-                <strong>Cartão de Crédito</strong>
+                {form.paymentMethod === 'Credit' && (
+                  <strong>Cartão de Crédito</strong>
+                )}
+
+                {form.paymentMethod === 'Debit' && (
+                  <strong>Cartão de Débito</strong>
+                )}
+
+                {form.paymentMethod === 'Cash' && <strong>Dinheiro</strong>}
               </InfoContent>
             </Info>
           </Infos>

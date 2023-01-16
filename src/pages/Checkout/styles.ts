@@ -91,6 +91,28 @@ export const FillInput = styled(DefaultInput)`
   flex: 1;
 `
 
+export const OptionalInputContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex: 1;
+
+  height: 100%;
+  align-items: center;
+
+  input {
+    padding-right: 4.375rem;
+  }
+
+  span {
+    position: absolute;
+    right: 0;
+    padding: 0 0.75rem;
+
+    color: ${(props) => props.theme['base-label']};
+    font-size: 0.75rem;
+  }
+`
+
 export const SubAddressInputWrapper = styled.div`
   display: flex;
   gap: 0.75rem;

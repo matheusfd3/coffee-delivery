@@ -27,6 +27,7 @@ import {
   AddressInputWrapper,
   DefaultInput,
   SubAddressInputWrapper,
+  OptionalInputContainer,
   AddressHeaderContainer,
   AddressHeader,
   PaymentHeaderContainer,
@@ -49,7 +50,7 @@ const formValidationSchema = zod.object({
   district: zod.string().min(1),
   city: zod.string().min(1),
   state: zod.string().length(2),
-  paymentMethod: zod.enum(['Credit', 'Debit', 'Cash']),
+  paymentMethod: zod.enum(['Credit', 'Debit', 'Cash', '']),
 })
 
 type FormValidationData = zod.infer<typeof formValidationSchema>
@@ -77,7 +78,7 @@ export function Checkout() {
   const navigate = useNavigate()
 
   function handleCreateNewOrder(data: FormValidationData) {
-    if (coffees.length === 0) return
+    if (coffees.length === 0 || data.paymentMethod === '') return
     setNewValuesForm(data)
     navigate('/success')
   }
@@ -113,11 +114,14 @@ export function Checkout() {
                 type="text"
                 {...register('streetNumber')}
               />
-              <FillInput
-                placeholder="Complemento"
-                type="text"
-                {...register('complement')}
-              />
+              <OptionalInputContainer>
+                <FillInput
+                  placeholder="Complemento"
+                  type="text"
+                  {...register('complement')}
+                />
+                <span>Opcional</span>
+              </OptionalInputContainer>
             </SubAddressInputWrapper>
             <SubAddressInputWrapper>
               <DefaultInput

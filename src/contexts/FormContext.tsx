@@ -9,7 +9,7 @@ interface IForm {
   district: string
   city: string
   state: string
-  paymentMethod: 'Credit' | 'Debit' | 'Cash'
+  paymentMethod: 'Credit' | 'Debit' | 'Cash' | ''
 }
 
 interface FormContextType {
@@ -41,7 +41,7 @@ export function FormContextProvider({ children }: FormContextProviderProps) {
       district: '',
       city: '',
       state: '',
-      paymentMethod: 'Credit',
+      paymentMethod: '',
     }
   })
 
